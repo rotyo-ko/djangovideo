@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}EizoSite|Top{% endblock %}
+
+{% block header %}みんなの投稿{% endblock %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    {% for video in video_list %}
+    <div class="col-md-3 mb-3">
+      <div class="card h-100" style="border-radius: 10px;">
+        <a class="link-opacity-25-hover" href="{% url 'videoboard:detail' pk=video.pk %}">
+          <img src="{{ video.thumbnail.url }}" class="img-fluid rounded hover-opacity" alt="photo" style="width: 100%; height: auto; object-fit: cover;">
+        </a>  
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>  
+
+{% endblock %}
