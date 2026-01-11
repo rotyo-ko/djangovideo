@@ -1,5 +1,15 @@
 # 簡易動画掲示板
 
+## 使用技術
+
+- Python 3.13以降
+- Django 5.2
+- Bootstrap 5
+- PostgreSQL（開発時）
+- SQLite（このリポジトリ）
+- django-environ
+- django-allauth
+
 ## 概要
 
 このプロジェクトは、Django の学習目的で作成した Web アプリケーションです。
