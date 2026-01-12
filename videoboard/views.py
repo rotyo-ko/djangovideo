@@ -116,7 +116,7 @@ class VideoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class CommentCreateView(LoginRequiredMixin, CreateView):
     model = VideoComment
-    template_name = "detail.html"
+    template_name = "videoboard/detail.html"
     fields = ["comment"]
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -125,12 +125,12 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
     def get_success_url(self):
-        return reverse("videoboard:detail", pk=self.kwargs["pk"])
+        return reverse("videoboard:detail", kwargs={"pk": self.kwargs["pk"]})
     
 
 class CommentEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = VideoComment
-    template_name = "comment_edit.html"
+    template_name = "videoboard/comment_edit.html"
     fields = ["comment"]
     def test_func(self):
         comment = self.get_object()
@@ -146,12 +146,12 @@ class CommentEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     
     def get_success_url(self):
         comment = self.get_object()
-        return reverse("board:detail", kwargs={"pk": comment.video.pk})
+        return reverse("videoboard:detail", kwargs={"pk": comment.video.pk})
     
 
 class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = VideoComment
-    template_name = "delete_confirm.html"
+    template_name = "videoboard/delete_confirm.html"
     
     def test_func(self):
         comment = self.get_object()
@@ -159,4 +159,5 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     
     def get_success_url(self):
         comment = self.get_object()
-        return reverse("board:detail", kwargs={"pk": comment.photo.pk})
+        
+        return reverse("videoboard:detail", kwargs={"pk": comment.video.pk})
